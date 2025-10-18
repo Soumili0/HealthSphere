@@ -36,16 +36,16 @@ public class VideoCallController {
 
     // Schedule a new video call
     @PostMapping
-    public VideoCall scheduleVideoCall(@RequestBody VideoCall videoCall) {
+    public Videocall scheduleVideoCall(@RequestBody Videocall videoCall) {
         return videoCallService.scheduleCall(videoCall);
     }
 
     // Update an existing video call
     @PutMapping("/{id}")
-    public ResponseEntity<VideoCall> updateVideoCall(@PathVariable Long id,
-                                                     @RequestBody VideoCall updatedCall) {
+    public ResponseEntity<Videocall> updateVideoCall(@PathVariable Long id,
+                                                     @RequestBody VideocallService updatedCall) {
         try {
-            VideoCall call = videoCallService.updateCall(id, updatedCall);
+            Videocall call = videoCallService.updateCall(id, updatedCall);
             return ResponseEntity.ok(call);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
