@@ -38,7 +38,7 @@ public class AuthService {
         // এখানে user save করার logic হবে (Patient/Doctor entity)
         // উদাহরণ:
         Patient patient = new Patient();
-        patient.setFullName(signUpRequest.getFullName());
+        patient.setFullName((String) signUpRequest.getFullName());
         // patient.setEmail(signUpRequest.getEmail());
         // patient.setPhone(signUpRequest.getPhone());
         // patient.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
