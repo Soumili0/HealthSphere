@@ -45,7 +45,6 @@ public class Patient {
     @Column(length = 500)
     private String medicalHistory;  // Optional: short medical background
 
-
     // ======================
     // 🔗 Relationship Mapping
     // ======================
@@ -54,34 +53,79 @@ public class Patient {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments;
 
+    // ======================
+    // ✅ Manual Getters & Setters
+    // ======================
 
-	public void setFullName(Object fullName2) {
-		// TODO Auto-generated method stub
-		
-	}
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Object getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getFullName() {
+        return fullName;
+    }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-	public Object getFullName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public int getAge() {
+        return age;
+    }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-	public Object getEmail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getGender() {
+        return gender;
+    }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public Object getPhone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMedicalHistory() {
+        return medicalHistory;
+    }
+
+    public void setMedicalHistory(String medicalHistory) {
+        this.medicalHistory = medicalHistory;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
 }
