@@ -25,7 +25,7 @@ public class VideocallService {
     public List<Videocall> getAllCalls() {
         return (List<Videocall>) videoCallRepository.findAll();
     }
-
+//
     public Optional<Videocall> getCallById(Long id) {
         return (Optional<Videocall>) videoCallRepository.findById(id);
     }
