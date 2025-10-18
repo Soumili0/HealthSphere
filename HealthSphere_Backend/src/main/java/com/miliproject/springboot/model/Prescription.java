@@ -37,30 +37,53 @@ public class Prescription {
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
-	public Doctor getDoctor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // Getters
+    public Doctor getDoctor() {
+        return doctor;
+    }
 
-	public Object getDiagnosis() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getDiagnosis() {
+        return diagnosis;
+    }
 
-	public String getMedications() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getMedications() {
+        return medications;
+    }
 
-	public Object getDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public LocalDate getDate() {
+        return date;
+    }
 
-	public Object getNotes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getNotes() {
+        return notes;
+    }
 
-	
+    public Patient getPatient() {
+        return patient;
+    }
+
+    // Setters
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public void setMedications(String medications) {
+        this.medications = medications;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 }
