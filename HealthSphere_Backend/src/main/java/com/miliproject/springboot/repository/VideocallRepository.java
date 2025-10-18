@@ -1,5 +1,5 @@
 package com.miliproject.springboot.repository;
-
+//
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.miliproject.springboot.model.Videocall;
 import java.util.List;
