@@ -1,5 +1,9 @@
 package com.miliproject.springboot.dto;
 
-public class LoginRequest {
+import lombok.Data;
 
+@Data
+public class LoginRequestDTO {
+    private String emailOrPhone;
+    private String password;
 }
