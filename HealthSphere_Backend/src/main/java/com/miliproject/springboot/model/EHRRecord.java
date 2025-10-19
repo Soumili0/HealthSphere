@@ -1,6 +1,8 @@
 package com.miliproject.springboot.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,27 +19,35 @@ public class EHRRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // কোন রোগীর রেকর্ড এটা
-    @Column(nullable = false)
-    private Long patientId;
+    // The patient this record belongs to
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id", nullable = false)
+    @NotNull
+    private Patient patient;
 
-    // কোন ডাক্তারের রেকর্ড তৈরি করা
-    @Column(nullable = false)
-    private Long doctorId;
+    // The doctor who created this record
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_id", nullable = false)
+    @NotNull
+    private Doctor doctor;
 
-    // ডায়াগনোসিস সম্পর্কিত তথ্য
+    // Information about the diagnosis
     @Column(nullable = false)
+    @NotBlank
     private String diagnosis;
 
-    // চিকিৎসা বা প্রেসক্রিপশন সম্পর্কিত বিস্তারিত
+    // Details about treatment or prescription
+    @Lob
     private String treatmentDetails;
 
-    // মেডিকেল টেস্টের ফলাফল
+    // Results of medical tests
+    @Lob
     private String testResults;
 
-    // অতিরিক্ত নোট
+    // Additional notes
+    @Lob
     private String notes;
 
-    // তারিখ
+    // Date of the record
     private LocalDate recordDate = LocalDate.now();
 }
