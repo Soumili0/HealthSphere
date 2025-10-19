@@ -9,9 +9,17 @@ import java.util.List;
 @Repository
 public interface EHRRepository extends JpaRepository<EHRRecord, Long> {
 
-    // নির্দিষ্ট রোগীর সব EHR রেকর্ড
+    // ================================
+    // 🔹 Fetch all EHR records for a specific patient
+    // ================================
+    // This method generates a query like:
+    // SELECT * FROM ehr_records WHERE patient_id = :patientId
     List<EHRRecord> findByPatientId(Long patientId);
 
-    // নির্দিষ্ট ডাক্তারের সব রেকর্ড
+    // ================================
+    // 🔹 Fetch all EHR records created by a specific doctor
+    // ================================
+    // This method generates a query like:
+    // SELECT * FROM ehr_records WHERE doctor_id = :doctorId
     List<EHRRecord> findByDoctorId(Long doctorId);
 }
