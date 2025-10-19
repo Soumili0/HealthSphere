@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    // role নাম অনুযায়ী খুঁজে বের করা (যেমন "ADMIN" বা "PATIENT")
+    // ================================
+    // 🔹 Find a Role entity by its name
+    // Example: "ADMIN", "DOCTOR", "PATIENT"
+    // This is useful when assigning a role to a user
+    // ================================
     Role findByName(String name);
 }
