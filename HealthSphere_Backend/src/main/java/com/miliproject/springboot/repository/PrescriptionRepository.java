@@ -11,12 +11,19 @@ import java.util.List;
 @Repository
 public interface PrescriptionRepository extends JpaRepository<Prescription, Long> {
 
-    // Patient object অনুযায়ী prescription গুলি
+    // ================================
+    // 🔹 Find all prescriptions for a specific Patient object
+    // ================================
     List<Prescription> findByPatient(Patient patient);
 
-    // Doctor object অনুযায়ী prescription গুলি
+    // ================================
+    // 🔹 Find all prescriptions for a specific Doctor object
+    // ================================
     List<Prescription> findByDoctor(Doctor doctor);
 
-    // ✅ FIX: Add this method to resolve the 'findByPatientId' error
+    // ================================
+    // 🔹 Find all prescriptions by patient ID
+    // Useful if you have the ID instead of the Patient object
+    // ================================
     List<Prescription> findByPatientId(Long patientId);
 }
