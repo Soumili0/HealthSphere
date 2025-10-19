@@ -27,33 +27,8 @@ public class Appointment {
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    // Future mapping: Doctor
+    // Many appointments belong to one doctor
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
-
-	public Object getAppointmentDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Long getDoctorId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getStatus() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Doctor getDoctor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
