@@ -6,4 +6,7 @@ import lombok.Data;
 public class LoginRequestDTO {
     private String emailOrPhone;
     private String password;
+    
+    // Second factor (OTP)
+    private String otp; 
 }
