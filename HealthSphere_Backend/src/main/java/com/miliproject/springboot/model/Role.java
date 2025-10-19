@@ -8,37 +8,20 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data               // Generates getters, setters, toString, equals, hashCode
+@NoArgsConstructor   // No-arg constructor
+@AllArgsConstructor  // All-args constructor
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;  // Primary key
 
     @Column(nullable = false, unique = true)
-    private String name; // উদাহরণ: "ADMIN", "DOCTOR", "PATIENT", "USER"
+    private String name;  // Role name, e.g., "ADMIN", "DOCTOR", "PATIENT"
 
-    // Optional: Permissions linked to the role
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> permissions;
-
-    // Getters
-    public String getName() {
-        return name;
-    }
-
-    public Set<String> getPermissions() {
-        return permissions;
-    }
-
-    // Setters
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPermissions(Set<String> permissions) {
-        this.permissions = permissions;
-    }
+    private Set<String> permissions;  
+    // Permissions linked to this role, e.g., "READ_PATIENT", "WRITE_PRESCRIPTION"
+    // Stored as a separate collection table automatically by JPA
 }
