@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
 @Entity
@@ -27,63 +28,23 @@ public class Prescription {
 
     private LocalDate date;
 
-    // Prescription কে patient এর সাথে link
+    // =========================
+    // 🔗 Relationships
+    // =========================
+
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    // Prescription কে doctor এর সাথে link
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
-    // Getters
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public String getDiagnosis() {
-        return diagnosis;
-    }
-
-    public String getMedications() {
-        return medications;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    // Setters
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
-    }
-
-    public void setMedications(String medications) {
-        this.medications = medications;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    // Automatically set date when saving new prescription
+    @PrePersist
+    public void prePersist() {
+        if (date == null) {
+            date = LocalDate.now();
+        }
     }
 }
