@@ -2,55 +2,84 @@ package com.miliproject.springboot.service;
 
 import com.miliproject.springboot.model.Patient;
 import com.miliproject.springboot.repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class to handle Patient-related operations.
+ */
 @Service
+@RequiredArgsConstructor // Lombok generates constructor for all final fields
 public class PatientService {
 
     private final PatientRepository patientRepository;
 
-    @Autowired
-    public PatientService(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
-    }
-
-    // Get all patients
+    /**
+     * Fetch all patients from the database.
+     *
+     * @return list of all patients
+     */
     public List<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
 
-    // Get patient by ID
+    /**
+     * Fetch a patient by their ID.
+     *
+     * @param id Patient ID
+     * @return Optional containing patient if found
+     */
     public Optional<Patient> getPatientById(Long id) {
         return patientRepository.findById(id);
     }
 
-    // Get patient by email
+    /**
+     * Fetch a patient by their email.
+     *
+     * @param email Patient email
+     * @return Optional containing patient if found
+     */
     public Optional<Patient> getPatientByEmail(String email) {
         return patientRepository.findByEmail(email);
     }
 
-    // Get patient by phone
+    /**
+     * Fetch a patient by their phone number.
+     *
+     * @param phone Patient phone
+     * @return Optional containing patient if found
+     */
     public Optional<Patient> getPatientByPhone(String phone) {
         return patientRepository.findByPhone(phone);
     }
 
-    // Add new patient
+    /**
+     * Add a new patient.
+     * Validates that email and phone are unique.
+     *
+     * @param patient Patient entity to save
+     * @return Saved patient entity
+     */
     public Patient addPatient(Patient patient) {
-        // Optional: check if email or phone already exists
-        if (patientRepository.findByEmail((String) patient.getEmail()).isPresent()) {
+        if (patientRepository.findByEmail(patient.getEmail()).isPresent()) {
             throw new RuntimeException("Email already exists: " + patient.getEmail());
         }
-        if (patientRepository.findByPhone((String) patient.getPhone()).isPresent()) {
+        if (patientRepository.findByPhone(patient.getPhone()).isPresent()) {
             throw new RuntimeException("Phone already exists: " + patient.getPhone());
         }
         return patientRepository.save(patient);
     }
 
-    // Update existing patient
+    /**
+     * Update an existing patient by ID.
+     *
+     * @param id             Patient ID
+     * @param updatedPatient Patient entity with updated data
+     * @return Updated patient entity
+     */
     public Patient updatePatient(Long id, Patient updatedPatient) {
         return patientRepository.findById(id).map(patient -> {
             patient.setFullName(updatedPatient.getFullName());
@@ -63,7 +92,11 @@ public class PatientService {
         }).orElseThrow(() -> new RuntimeException("Patient not found with id: " + id));
     }
 
-    // Delete patient
+    /**
+     * Delete a patient by ID.
+     *
+     * @param id Patient ID to delete
+     */
     public void deletePatient(Long id) {
         if (!patientRepository.existsById(id)) {
             throw new RuntimeException("Patient not found with id: " + id);
