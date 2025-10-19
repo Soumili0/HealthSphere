@@ -1,44 +1,31 @@
 package com.miliproject.springboot.repository;
-//
-import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.miliproject.springboot.model.Videocall;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-public class VideocallRepository {
+/**
+ * VideocallRepository provides database operations for the Videocall entity.
+ * It extends JpaRepository to inherit CRUD methods like save(), findById(), delete(), etc.
+ */
+@Repository
+public interface VideocallRepository extends JpaRepository<Videocall, Long> {
 
-    public interface VideoCallRepository extends JpaRepository<Videocall, Long> {
-        List<Videocall> findByPatientId(Long patientId);
-        List<Videocall> findByDoctorId(Long doctorId);
-        Videocall save(Videocall call);
-    }
+    /**
+     * Fetch all video calls scheduled for a specific patient.
+     *
+     * @param patientId the ID of the patient
+     * @return list of Videocall objects for the patient
+     */
+    List<Videocall> findByPatientId(Long patientId);
 
-    private Videocall videocall;
-
-    public VideocallRepository() {
-        this.videocall = new Videocall();
-    }
-
-    public void setDoctor(Object doctor) {
-        videocall.setDoctor((com.miliproject.springboot.model.Doctor) doctor);
-    }
-
-    public void setPatient(Object patient) {
-        videocall.setPatient((com.miliproject.springboot.model.Patient) patient);
-    }
-
-    public void setStartTime(Object startTime) {
-        videocall.setStartTime((java.time.LocalDateTime) startTime);
-    }
-
-    public void setEndTime(Object endTime) {
-        videocall.setEndTime((java.time.LocalDateTime) endTime);
-    }
-
-    public void setStatus(Object status) {
-        videocall.setStatus((String) status);
-    }
-
-    public Videocall getVideocall() {
-        return videocall;
-    }
+    /**
+     * Fetch all video calls scheduled for a specific doctor.
+     *
+     * @param doctorId the ID of the doctor
+     * @return list of Videocall objects for the doctor
+     */
+    List<Videocall> findByDoctorId(Long doctorId);
 }
