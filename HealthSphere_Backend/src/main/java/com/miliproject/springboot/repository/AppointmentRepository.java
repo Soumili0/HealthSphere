@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     
-    // Patient object এর ID অনুযায়ী Appointment খোঁজা
+    // Find all appointments for a given patient ID
     List<Appointment> findByPatientId(Long patientId);
 
-    // ✅ FIX: Doctor object এর ID অনুযায়ী Appointment খোঁজা
-    // 'Doctor' (field) -> '_' -> 'Id' (primary key)
+    // Find all appointments for a given doctor ID
+    // Explanation:
+    // - 'Doctor' is the field name in Appointment entity
+    // - '_Id' means we're querying the 'id' of the associated Doctor entity
     List<Appointment> findByDoctor_Id(Long doctorId);
 }
